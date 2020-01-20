@@ -9,50 +9,63 @@
 </head>
 <body>
     <script>
-        function computerPlay(){
-            const choice = ["Paper", "Rock", "Scissors"];
-            let number = Math.floor(Math.random() * 3);
-            if (number == 0){
+        function roundPlay(computerSelection, playerSelection){
+            function computerPlay(){
+                const choice = ["Paper", "Rock", "Scissors"];
+                let number = Math.floor(Math.random() * 3);
+                if (number == 0){
+                    return computerSelection = choice[0];
+                } else if (number == 1){
+                    return computerSelection = choice[1];
+                } else {
+                    return computerSelection = choice[2];
+                }
 
-                return "Computer Selection: " + choice[0];
-            } else if (number ==1){
-                return "Computer Selection: " + choice[1];
-            }else {
-                return "Computer Selection: " + choice[2];
             }
-
-        }
-        
-        function playerPlay(playerSelection){
-            playerSelection = prompt("Pick one: rock, paper, scissors");
-            function capitalize(playerSelection){
-                string1 = playerSelection.slice(1).toLowerCase();
-                string2 = playerSelection.slice(0, 1).toUpperCase();
-                return playerSelection = string2 + string1;
-            }
-            return ("Player Selection: " + capitalize(playerSelection));
-        }
-
-
-        const computerSelection = computerPlay();
-        const playerSelection = playerPlay();
-        console.log(computerSelection);
-        console.log(playerSelection);
-
-
-
-        
-        //     if (playerSelection == computerSelection){
-        //         return "This game is a draw!"
-        //     } else if (computerSelection == 'Paper'){
-        //         if(playerSelection == 'Rock'){
-        //             return "You lose! Paper beats rock."
-        //         }
-        //     } else if (playerSelection == 'Scissors' && computerSelection == 'Rock'){
             
-        //     }
-        // }
-        //console.log(playRound(playerSelection, computerSelection));
+            function playerPlay(playerSelection){
+                playerSelection = prompt("Pick one: rock, paper, scissors");
+                function capitalize(playerSelection){
+                    string1 = playerSelection.slice(1).toLowerCase();
+                    string2 = playerSelection.slice(0, 1).toUpperCase();
+                    return playerSelection = string2 + string1;
+                }
+                return (playerSelection = capitalize(playerSelection));
+            }
+            
+            playerSelection = playerPlay();
+            computerSelection = computerPlay();
+            console.log("Player: " + playerSelection);
+            console.log("Computer: " + computerSelection);
+            let result;
+            
+            if (computerSelection == 'Rock' && playerSelection == 'Paper'){
+                result = console.log("Player wins. Paper beats rock");
+            } else if (computerSelection == 'Rock' && playerSelection == 'Scissors'){
+                result = console.log('Computer wins. Rock beats scissors.');
+            } else if (computerSelection == 'Rock' && playerSelection == 'Rock'){
+                result = console.log("This game is a draw!");
+            } else if (computerSelection == 'Paper' && playerSelection == 'Scissors'){
+            result = console.log("Player wins. Scissors beats paper");
+            } else if (computerSelection == 'Paper' && playerSelection == 'Rock'){
+            result = console.log('Computer wins. Paper beats rock.');
+            } else if (computerSelection == 'Paper' && playerSelection == 'Paper'){
+            result = console.log("This game is a draw!");
+            } else if (computerSelection == 'Scissors' && playerSelection == 'Rock'){
+            result = console.log("Player wins. Rock beats scissors");
+            } else if (computerSelection == 'Scissors' && playerSelection == 'Paper'){
+            result = console.log('Computer wins. Scissors beats paper.');
+            } else if (computerSelection == 'Scissors' && playerSelection == 'Scissors'){
+            result = console.log("This game is a draw!");
+            } else{
+                result = "Error: Player misspelled choice. Try again."
+            }
+            return result;
+        }
+        
+        console.log(roundPlay());
+        
+        
     </script>
 </body>
 </html>
