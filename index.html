@@ -10,8 +10,11 @@
 <body>
     <script> 
         function roundPlay(computerSelection, playerSelection){
+            //Makes computer choice by corresponding a randomly chosen number
+            //between 0 and 2 with the index of the same number. 
             function computerPlay(){
                 const choice = ["Paper", "Rock", "Scissors"];
+                //must be 3, else scissors choice gets omitted. 
                 let number = Math.floor(Math.random() * 3);
                 if (number == 0){
                     return computerSelection = choice[0];
@@ -22,53 +25,73 @@
                 }
 
             }
-            
+            //prompts human player for choice
             function playerPlay(playerSelection){
                 playerSelection = prompt("Pick one: rock, paper, scissors");
+                //To ensure playerSelection is case insensitive
                 function capitalize(playerSelection){
+                    //all characters from the second to the end become lowercase
                     string1 = playerSelection.slice(1).toLowerCase();
+                    //only first character becomes uppercase
                     string2 = playerSelection.slice(0, 1).toUpperCase();
                     return playerSelection = string2 + string1;
                 }
                 return (playerSelection = capitalize(playerSelection));
             }
+
+            //playerSelection must be made before computerSelection, 
+            //else player sees computerSelection before playerSelection is made. 
             playerSelection = playerPlay();
             computerSelection = computerPlay();
-            console.log("PLayer: " + playerSelection);
+            console.log("Player: " + playerSelection);
             console.log("Computer: " + computerSelection);
 
             let result;
-
+            //the possible cases. All lost cases are put into a single if-statement for ease of reading.
             if ((computerSelection === "Paper" && playerSelection === "Rock") || 
-            (computerSelection ==="Rock" && playerSelection === " Scissors") || 
-            (computerSelection === "Scissors" && playerSelection ==="Paper")){
+            (computerSelection ==="Rock" && playerSelection === "Scissors") || 
+            (computerSelection === "Scissors" && playerSelection === "Paper")){
                 result = "Lose. " + computerSelection + " beats " + playerSelection;
+                console.log(result);
                 ++computerScore
                 console.log("Computer Score: " + computerScore);
-                console.log("PLayer Score: " + playerScore);
+                console.log("Player Score: " + playerScore);
             } else if (computerSelection === playerSelection){
                 result = "Draw.";
+                console.log(result);
                 console.log("Computer Score: " + computerScore);
-                console.log("PLayer Score: " + playerScore);
+                console.log("Player Score: " + playerScore);
+            }else if ((playerSelection != "Rock") && (playerSelection != "Paper") && (playerSelection != "Scissors")){
+                result = "Error. Player misspelled choice.";
+                console.log(result);
             }
             else{
                 result = "Win. " + playerSelection + " beats " + computerSelection;
                 ++playerScore;
+                console.log(result);
                 console.log("Computer Score: " + computerScore);
-                console.log("PLayer Score: " + playerScore);
+                console.log("Player Score: " + playerScore);
             }
-            console.log(result);
+            
                 
         }     
         
             function game(){
                 computerScore = 0;
                 playerScore = 0;
+                computerScore.toFixed(2);
+                playerScore.toFixed(2);
                 count = 0;
-                while (count < 5){
-                    roundPlay();
-                    count++;
+                //These three conditions together makesgame() a 5 round match
+                //where the match can end early if one of the players
+                //scores 3/5 at any time.
+                while (computerScore < 3 && playerScore < 3 && count < 5){
+                    ++count;
+                    console.log("Game #" + count);
+                    roundPlay();   
                 }
+                
+                //outputs match result
                 if (computerScore > playerScore){
                     console.log("Computer wins: " + computerScore + " to " + playerScore);
                 } else if (playerScore > computerScore){
