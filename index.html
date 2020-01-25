@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
+    <script> 
         function roundPlay(computerSelection, playerSelection){
             function computerPlay(){
                 const choice = ["Paper", "Rock", "Scissors"];
@@ -32,40 +32,59 @@
                 }
                 return (playerSelection = capitalize(playerSelection));
             }
-            
             playerSelection = playerPlay();
             computerSelection = computerPlay();
-            console.log("Player: " + playerSelection);
+            console.log("PLayer: " + playerSelection);
             console.log("Computer: " + computerSelection);
+
             let result;
-            
-            if (computerSelection == 'Rock' && playerSelection == 'Paper'){
-                result = console.log("Player wins. Paper beats rock");
-            } else if (computerSelection == 'Rock' && playerSelection == 'Scissors'){
-                result = console.log('Computer wins. Rock beats scissors.');
-            } else if (computerSelection == 'Rock' && playerSelection == 'Rock'){
-                result = console.log("This game is a draw!");
-            } else if (computerSelection == 'Paper' && playerSelection == 'Scissors'){
-            result = console.log("Player wins. Scissors beats paper");
-            } else if (computerSelection == 'Paper' && playerSelection == 'Rock'){
-            result = console.log('Computer wins. Paper beats rock.');
-            } else if (computerSelection == 'Paper' && playerSelection == 'Paper'){
-            result = console.log("This game is a draw!");
-            } else if (computerSelection == 'Scissors' && playerSelection == 'Rock'){
-            result = console.log("Player wins. Rock beats scissors");
-            } else if (computerSelection == 'Scissors' && playerSelection == 'Paper'){
-            result = console.log('Computer wins. Scissors beats paper.');
-            } else if (computerSelection == 'Scissors' && playerSelection == 'Scissors'){
-            result = console.log("This game is a draw!");
-            } else{
-                result = "Error: Player misspelled choice. Try again."
+
+            if ((computerSelection === "Paper" && playerSelection === "Rock") || 
+            (computerSelection ==="Rock" && playerSelection === " Scissors") || 
+            (computerSelection === "Scissors" && playerSelection ==="Paper")){
+                result = "Lose. " + computerSelection + " beats " + playerSelection;
+                ++computerScore
+                console.log("Computer Score: " + computerScore);
+                console.log("PLayer Score: " + playerScore);
+            } else if (computerSelection === playerSelection){
+                result = "Draw.";
+                console.log("Computer Score: " + computerScore);
+                console.log("PLayer Score: " + playerScore);
             }
-            return result;
-        }
+            else{
+                result = "Win. " + playerSelection + " beats " + computerSelection;
+                ++playerScore;
+                console.log("Computer Score: " + computerScore);
+                console.log("PLayer Score: " + playerScore);
+            }
+            console.log(result);
+                
+        }     
         
-        console.log(roundPlay());
+            function game(){
+                computerScore = 0;
+                playerScore = 0;
+                count = 0;
+                while (count < 5){
+                    roundPlay();
+                    count++;
+                }
+                if (computerScore > playerScore){
+                    console.log("Computer wins: " + computerScore + " to " + playerScore);
+                } else if (playerScore > computerScore){
+                    console.log("Player wins: " + playerScore + " to " + computerScore);
+                } else {
+                    console.log ("Draw: " + computerScore + " to " + playerScore);
+                }
+            }
+            
         
-        
+        console.log(game());
+                
+            
+                
+                
+                
     </script>
 </body>
 </html>
